@@ -1,0 +1,58 @@
+{
+    "awards": [
+        {
+            "title": "TCS Service & Commitment Award",
+            "date": "Aug, 2026"
+        },
+        {
+            "title": "TCS Applause for Team Award",
+            "date": "May, 2026"
+        },
+        {
+            "title": "TCS AI Fridays Emerging Innovator Award",
+            "date": "Mar, 2026"
+        },
+        {
+            "title": "TCS On the Spot Award",
+            "date": "2025-2026",
+            "count": 2
+        },
+        {
+            "title": "Best Team Award",
+            "date": "2024-2025",
+            "count": 2
+        }
+    ],
+    "impact": [
+        {
+            "value": "200+",
+            "label": "Defects Resolved",
+            "description": "Resolved application defects across multiple business modules, including production and BTS issues."
+        },
+        {
+            "value": "50+",
+            "label": "Production Defects",
+            "description": "Investigated and resolved production issues while supporting application stability and release readiness."
+        },
+        {
+            "value": "80+",
+            "label": "Change Requests",
+            "description": "Delivered application enhancements and change requests across web and mobile development initiatives."
+        },
+        {
+            "value": "6+",
+            "label": "React Web Applications",
+            "description": "Created scalable application structures, routing patterns and reusable component architecture."
+        },
+        {
+            "value": "4+",
+            "label": "React Native Applications",
+            "description": "Developed mobile application foundations with reusable navigation, theming and component architecture."
+        },
+        {
+            "value": "22+",
+            "label": "APIs Developed",
+            "description": "Developed backend APIs and supported integration across web and mobile application workflows."
+        }
+    ]
+}

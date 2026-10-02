@@ -1,0 +1,33 @@
+[
+  {
+    "degree": "Bachelor of Technology (B.Tech)",
+    "field": "Electronics and Communication Engineering",
+    "institution": "Academy of Technology",
+    "university": "Maulana Abul Kalam Azad University of Technology (MAKAUT)",
+    "startYear": "2019",
+    "endYear": "2023",
+    "cgpa": "9.32/10",
+    "coursework": [
+      "Java",
+      "C++",
+      "DSA",
+      "Software Engineering"
+    ]
+  },
+  {
+    "degree": "Class XII",
+    "field": "",
+    "institution": "Barrackpore Government High School",
+    "university": "West Bengal Council of Higher Secondary Education (WBCHSE)",
+    "endYear": "2019",
+    "percentage": "78%"
+  },
+  {
+    "degree": "Class X",
+    "field": "",
+    "institution": "Barrackpore Government High School",
+    "university": "West Bengal Board of Secondary Education (WBBSE)",
+    "endYear": "2017",
+    "percentage": "87.57%"
+  }
+]

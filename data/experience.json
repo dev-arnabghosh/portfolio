@@ -1,0 +1,40 @@
+[
+  {
+    "company": "Tata Consultancy Services (TCS)",
+    "role": "Full Stack Developer – Wellness Web & Mobile (POC)",
+    "location": "Kolkata, India",
+    "startDate": "Sep 2025",
+    "endDate": "Present",
+    "highlights": [
+      "Architected 6+ React web and 4+ React Native apps with scalable routing, Redux, navigation, theming and reusable architecture used by 10+ developers.",
+      "Delivered 100+ web and 50+ mobile pages with 70+ reusable components, including dashboards, chatbot, feedback, booking, profile, file upload and graphs.",
+      "Developed 22+ APIs and integrated 50+ APIs, implementing role-based routing, accessible UI and 4+ AI features including chatbot, voice I/O, AI suggestions and page automation.",
+      "Led 10+ developers, conducted 100+ KT/debugging sessions, and delivered key web and mobile enhancements in cross-functional Agile/Scrum teams."
+    ]
+  },
+  {
+    "company": "Tata Consultancy Services (TCS)",
+    "role": "React Developer – Health Web Application",
+    "location": "Kolkata, India",
+    "startDate": "Apr 2025",
+    "endDate": "Aug 2025",
+    "highlights": [
+      "Developed React modules using React, Redux, JavaScript/TypeScript, MUI, Tailwind and REST APIs, with reusable components, routing, state management and themes.",
+      "Built complex UI screens and interactive graphs, implementing configurable themes and responsive, accessibility-focused interfaces from business and design requirements.",
+      "Resolved UI, navigation, state and API issues, collaborating with development and QA teams in an Agile/Scrum environment."
+    ]
+  },
+  {
+    "company": "Tata Consultancy Services (TCS)",
+    "role": "Java Developer – TCS BaNCS",
+    "location": "Kolkata, India",
+    "startDate": "2023",
+    "endDate": "Mar 2025",
+    "highlights": [
+      "Worked on TCS MasterCraft™ DevPlus, resolving defects across Annuity, Policy, and Scheme modules and supporting Workflow, Money, and Calculation in a shared codebase.",
+      "Resolved 200+ defects, including 50+ production/BTS defects, ensuring application stability and release readiness.",
+      "Built a real-time policy search engine with partial-text highlighting, scroll-based loading, and debouncing to improve responsiveness and reduce API calls.",
+      "Debugged JSP, Backing Bean, Service, DAO, and SQL/PLSQL layers; developed queries and supported QA and production troubleshooting."
+    ]
+  }
+]
