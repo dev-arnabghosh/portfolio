@@ -6,6 +6,9 @@ import { motion, type Variants } from "motion/react";
 
 import { profile, social } from "@/lib/data";
 
+import { useState } from "react";
+import ContactForm from "@/components/contact/ContactForm";
+
 const sectionVariants: Variants = {
     hidden: {
         opacity: 0,
@@ -46,6 +49,7 @@ const contactItemVariants: Variants = {
 };
 
 export default function Contact() {
+    const [isFormOpen, setIsFormOpen] = useState(false);
     const hasEmail = Boolean(profile.email);
     const hasPhone = Boolean(profile.phone);
     const hasLocation = Boolean(profile.location);
@@ -60,190 +64,215 @@ export default function Contact() {
     const github = social.github || profile.github;
 
     return (
-        <section
-            id="contact"
-            aria-labelledby="contact-heading"
-            className="relative overflow-x-clip border-t border-border pt-(--space-section) pb-(--space-section)"
-        >
-            <div className="mx-auto w-full min-w-0 max-w-(--content-width) overflow-x-clip px-5 sm:px-6">
-                {/* Section Header */}
-                <motion.div
-                    variants={sectionVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{
-                        once: true,
-                        amount: 0.3,
-                    }}
-                    className="mb-14 max-w-3xl"
-                >
-                    <div className="mb-4 flex items-center gap-3 text-muted">
-                        <motion.span
-                            initial={{
-                                opacity: 0,
-                                rotate: -20,
-                                scale: 0.7,
-                            }}
-                            whileInView={{
-                                opacity: 1,
-                                rotate: 0,
-                                scale: 1,
-                            }}
-                            viewport={{
-                                once: true,
-                            }}
-                            transition={{
-                                duration: 0.5,
-                                ease: [0.22, 1, 0.36, 1],
-                            }}
-                            aria-hidden="true"
+        <>
+            <section
+                id="contact"
+                aria-labelledby="contact-heading"
+                className="relative overflow-x-clip border-t border-border pt-(--space-section) pb-(--space-section)"
+            >
+                <div className="mx-auto w-full min-w-0 max-w-(--content-width) overflow-x-clip px-5 sm:px-6">
+                    {/* Section Header */}
+                    <motion.div
+                        variants={sectionVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{
+                            once: true,
+                            amount: 0.3,
+                        }}
+                        className="mb-14 max-w-3xl"
+                    >
+                        <div className="mb-4 flex items-center gap-3 text-muted">
+                            <motion.span
+                                initial={{
+                                    opacity: 0,
+                                    rotate: -20,
+                                    scale: 0.7,
+                                }}
+                                whileInView={{
+                                    opacity: 1,
+                                    rotate: 0,
+                                    scale: 1,
+                                }}
+                                viewport={{
+                                    once: true,
+                                }}
+                                transition={{
+                                    duration: 0.5,
+                                    ease: [0.22, 1, 0.36, 1],
+                                }}
+                                aria-hidden="true"
+                            >
+                                <Send
+                                    size={18}
+                                    strokeWidth={1.8}
+                                />
+                            </motion.span>
+
+                            <span className="text-sm font-medium uppercase tracking-[0.18em]">
+                                Contact
+                            </span>
+                        </div>
+
+                        <h2
+                            id="contact-heading"
+                            className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
                         >
-                            <Send
-                                size={18}
-                                strokeWidth={1.8}
-                            />
-                        </motion.span>
+                            Let&apos;s Build Something
+                        </h2>
 
-                        <span className="text-sm font-medium uppercase tracking-[0.18em]">
-                            Contact
-                        </span>
-                    </div>
+                        <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
+                            Interested in working together, discussing an opportunity, or connecting
+                            about software engineering?
+                        </p>
+                    </motion.div>
 
-                    <h2
-                        id="contact-heading"
-                        className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl"
-                    >
-                        Let&apos;s Build Something
-                    </h2>
-
-                    <p className="mt-5 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
-                        Interested in working together, discussing an opportunity, or connecting
-                        about software engineering?
-                    </p>
-                </motion.div>
-
-                {/* Contact Content */}
-                <motion.div
-                    variants={contactContainerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{
-                        once: true,
-                        amount: 0.15,
-                    }}
-                    className="grid min-w-0 gap-5 lg:grid-cols-[1.15fr_0.85fr]"
-                >
-                    {/* Primary Contact Card */}
+                    {/* Contact Content */}
                     <motion.div
-                        variants={contactItemVariants}
-                        className="min-w-0 overflow-hidden rounded-lg border border-border bg-surface p-7 sm:p-9"
+                        variants={contactContainerVariants}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{
+                            once: true,
+                            amount: 0.15,
+                        }}
+                        className="grid min-w-0 gap-5 lg:grid-cols-[1.15fr_0.85fr]"
                     >
-                        <div className="relative z-10 flex h-full flex-col">
-                            <p className="text-sm font-medium uppercase tracking-[0.16em] text-muted">
-                                Get in touch
-                            </p>
+                        {/* Primary Contact Card */}
+                        <motion.div
+                            variants={contactItemVariants}
+                            className="min-w-0 overflow-hidden rounded-lg border border-border bg-surface p-7 sm:p-9"
+                        >
+                            <div className="relative z-10 flex h-full flex-col">
+                                <p className="text-sm font-medium uppercase tracking-[0.16em] text-muted">
+                                    Get in touch
+                                </p>
 
-                            <h3 className="mt-4 max-w-xl text-2xl font-semibold tracking-tight sm:text-3xl">
-                                Open to meaningful software engineering opportunities.
-                            </h3>
+                                <h3 className="mt-4 max-w-xl text-2xl font-semibold tracking-tight sm:text-3xl">
+                                    Open to meaningful software engineering opportunities.
+                                </h3>
 
-                            <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
-                                I&apos;m available for conversations around full-stack web and
-                                mobile development, engineering opportunities, and technical
-                                collaborations.
-                            </p>
+                                <p className="mt-4 max-w-xl text-sm leading-7 text-muted-foreground sm:text-base">
+                                    I&apos;m available for conversations around full-stack web and
+                                    mobile development, engineering opportunities, and technical
+                                    collaborations.
+                                </p>
 
-                            {/* Resume CTA */}
-                            <div className="mt-8">
-                                <motion.a
-                                    href="/resume.pdf"
-                                    download
-                                    whileHover={{
-                                        y: -2,
-                                    }}
-                                    whileTap={{
-                                        scale: 0.98,
-                                    }}
-                                    transition={{
-                                        duration: 0.2,
-                                    }}
-                                    className="inline-flex items-center gap-2.5 rounded-md px-5 py-3 text-sm font-medium transition-opacity hover:opacity-90"
-                                    style={{
-                                        backgroundColor: "var(--foreground)",
-                                        color: "var(--background)",
-                                    }}
-                                >
-                                    <Download
-                                        size={16}
-                                        strokeWidth={1.8}
-                                        aria-hidden="true"
-                                    />
-                                    Resume
-                                </motion.a>
+                                {/* Contact CTAs */}
+                                <div className="mt-8 flex flex-wrap items-center gap-3">
+                                    <motion.a
+                                        href="/resume.pdf"
+                                        download
+                                        whileHover={{
+                                            y: -2,
+                                        }}
+                                        whileTap={{
+                                            scale: 0.98,
+                                        }}
+                                        transition={{
+                                            duration: 0.2,
+                                        }}
+                                        className="inline-flex items-center gap-2.5 rounded-md px-5 py-3 text-sm font-medium transition-opacity hover:opacity-90"
+                                        style={{
+                                            backgroundColor: "var(--foreground)",
+                                            color: "var(--background)",
+                                        }}
+                                    >
+                                        <Download
+                                            size={16}
+                                            strokeWidth={1.8}
+                                            aria-hidden="true"
+                                        />
+                                        Resume
+                                    </motion.a>
+
+                                    <motion.button
+                                        type="button"
+                                        onClick={() => setIsFormOpen(true)}
+                                        whileHover={{
+                                            y: -2,
+                                        }}
+                                        whileTap={{
+                                            scale: 0.98,
+                                        }}
+                                        transition={{
+                                            duration: 0.2,
+                                        }}
+                                        className="inline-flex items-center gap-2.5 rounded-md border border-border bg-background px-5 py-3 text-sm font-medium text-foreground transition-colors hover:bg-surface"
+                                    >
+                                        Message
+                                    </motion.button>
+                                </div>
                             </div>
-                        </div>
+                        </motion.div>
+
+                        {/* Contact Details */}
+                        <motion.div
+                            variants={contactItemVariants}
+                            className="min-w-0 overflow-hidden rounded-lg border border-border bg-surface"
+                        >
+                            <div className="divide-y divide-border">
+                                {hasEmail && (
+                                    <ContactItem
+                                        icon={Mail}
+                                        label="Email"
+                                        value={profile.email}
+                                        href={`mailto:${profile.email}`}
+                                    />
+                                )}
+
+                                {hasPhone && (
+                                    <ContactItem
+                                        icon={Phone}
+                                        label="Phone"
+                                        value={profile.phone}
+                                        href={`tel:${profile.phone.replace(/\s/g, "")}`}
+                                    />
+                                )}
+
+                                {hasLocation && (
+                                    <ContactItem
+                                        icon={MapPin}
+                                        label="Location"
+                                        value={profile.location}
+                                    />
+                                )}
+
+                                {hasLinkedin && linkedin && (
+                                    <ContactItem
+                                        iconUrl="https://api.iconify.design/mdi/linkedin.svg?color=%23808080"
+                                        label="LinkedIn"
+                                        value="LinkedIn Profile"
+                                        href={
+                                            linkedin.startsWith("http")
+                                                ? linkedin
+                                                : `https://${linkedin}`
+                                        }
+                                        external
+                                    />
+                                )}
+
+                                {hasGithub && github && (
+                                    <ContactItem
+                                        iconUrl="https://api.iconify.design/simple-icons/github.svg?color=%23808080"
+                                        label="GitHub"
+                                        value="GitHub Profile"
+                                        href={
+                                            github.startsWith("http") ? github : `https://${github}`
+                                        }
+                                        external
+                                    />
+                                )}
+                            </div>
+                        </motion.div>
                     </motion.div>
-
-                    {/* Contact Details */}
-                    <motion.div
-                        variants={contactItemVariants}
-                        className="min-w-0 overflow-hidden rounded-lg border border-border bg-surface"
-                    >
-                        <div className="divide-y divide-border">
-                            {hasEmail && (
-                                <ContactItem
-                                    icon={Mail}
-                                    label="Email"
-                                    value={profile.email}
-                                    href={`mailto:${profile.email}`}
-                                />
-                            )}
-
-                            {hasPhone && (
-                                <ContactItem
-                                    icon={Phone}
-                                    label="Phone"
-                                    value={profile.phone}
-                                    href={`tel:${profile.phone.replace(/\s/g, "")}`}
-                                />
-                            )}
-
-                            {hasLocation && (
-                                <ContactItem
-                                    icon={MapPin}
-                                    label="Location"
-                                    value={profile.location}
-                                />
-                            )}
-
-                            {hasLinkedin && linkedin && (
-                                <ContactItem
-                                    iconUrl="https://api.iconify.design/mdi/linkedin.svg?color=%23808080"
-                                    label="LinkedIn"
-                                    value="LinkedIn Profile"
-                                    href={
-                                        linkedin.startsWith("http")
-                                            ? linkedin
-                                            : `https://${linkedin}`
-                                    }
-                                    external
-                                />
-                            )}
-
-                            {hasGithub && github && (
-                                <ContactItem
-                                    iconUrl="https://api.iconify.design/simple-icons/github.svg?color=%23808080"
-                                    label="GitHub"
-                                    value="GitHub Profile"
-                                    href={github.startsWith("http") ? github : `https://${github}`}
-                                    external
-                                />
-                            )}
-                        </div>
-                    </motion.div>
-                </motion.div>
-            </div>
-        </section>
+                </div>
+            </section>
+            <ContactForm
+                isOpen={isFormOpen}
+                onClose={() => setIsFormOpen(false)}
+            />
+        </>
     );
 }
 

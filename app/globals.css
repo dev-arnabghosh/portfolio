@@ -1,25 +1,22 @@
 @import "tailwindcss";
 
-:root {
-    /* ========================================
-     LIGHT THEME
-     ======================================== */
+/* ========================================
+   LIGHT THEME
+   ======================================== */
 
+:root {
     --background: #fafaf9;
     --foreground: #171717;
-
     --surface: #f3f3f2;
     --border: #dededc;
-
     --muted: #737373;
     --muted-foreground: #525252;
-
     --button-background: #171717;
     --button-foreground: #fafaf9;
 
     /* ========================================
-     DESIGN TOKENS
-     ======================================== */
+       DESIGN TOKENS
+       ======================================== */
 
     --radius-sm: 4px;
     --radius-md: 8px;
@@ -29,27 +26,52 @@
     --content-width: 1200px;
 
     --backdrop: rgb(23 23 23 / 70%);
+
+    /* ========================================
+       STATUS COLORS
+       ======================================== */
+
+    --success: #15803d;
+    --success-border: rgb(21 128 61 / 30%);
+    --success-background: rgb(21 128 61 / 9%);
+
+    --danger: #b42318;
+    --danger-border: rgb(180 35 24 / 32%);
+    --danger-background: rgb(180 35 24 / 9%);
 }
 
-[data-theme="dark"] {
-    /* ========================================
-     DARK THEME
-     ======================================== */
+/* ========================================
+   DARK THEME
+   ======================================== */
 
+[data-theme="dark"] {
     --background: #0a0a0a;
     --foreground: #f5f5f5;
-
     --surface: #141414;
     --border: #292929;
-
     --muted: #a3a3a3;
     --muted-foreground: #d4d4d4;
-
     --button-background: #f5f5f5;
     --button-foreground: #0a0a0a;
 
     --backdrop: rgb(245 245 245 / 20%);
+
+    /* ========================================
+       STATUS COLORS
+       ======================================== */
+
+    --success: #4ade80;
+    --success-border: rgb(74 222 128 / 35%);
+    --success-background: rgb(74 222 128 / 11%);
+
+    --danger: #ff6b61;
+    --danger-border: rgb(255 107 97 / 38%);
+    --danger-background: rgb(255 107 97 / 11%);
 }
+
+/* ========================================
+   TAILWIND THEME TOKENS
+   ======================================== */
 
 @theme inline {
     --color-background: var(--background);
@@ -59,6 +81,14 @@
     --color-muted: var(--muted);
     --color-muted-foreground: var(--muted-foreground);
 
+    --color-success: var(--success);
+    --color-success-border: var(--success-border);
+    --color-success-background: var(--success-background);
+
+    --color-danger: var(--danger);
+    --color-danger-border: var(--danger-border);
+    --color-danger-background: var(--danger-background);
+
     --color-button-background: var(--button-foreground);
     --color-button-foreground: var(--button-background);
 
@@ -66,16 +96,29 @@
     --font-mono: var(--font-geist-mono);
 }
 
+/* ========================================
+   GLOBAL RESET
+   ======================================== */
+
 * {
     box-sizing: border-box;
 }
 
+/* ========================================
+   HTML
+   ======================================== */
+
 html {
     scroll-behavior: smooth;
+
     /* Firefox */
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
 }
+
+/* ========================================
+   BODY
+   ======================================== */
 
 body {
     margin: 0;
@@ -93,6 +136,10 @@ body {
         color 250ms ease;
 }
 
+/* ========================================
+   FORM ELEMENTS
+   ======================================== */
+
 button,
 input,
 textarea,
@@ -109,26 +156,219 @@ a {
     text-decoration: none;
 }
 
+/* ========================================
+   TEXT SELECTION
+   ======================================== */
+
 ::selection {
     background: var(--foreground);
     color: var(--background);
 }
 
-/* ======================================== CUSTOM SCROLLBAR ======================================== */ /* Chrome, Edge, Safari */
+/* ========================================
+   CUSTOM SCROLLBAR
+   ======================================== */
+
+/* Chrome, Edge, Safari */
+
 ::-webkit-scrollbar {
     width: 8px;
 }
+
 ::-webkit-scrollbar-track {
     background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
     background: var(--border);
     border-radius: 999px;
     border: 1px solid transparent;
     background-clip: padding-box;
 }
+
 ::-webkit-scrollbar-thumb:hover {
     background: var(--muted);
     border: 1px solid transparent;
     background-clip: padding-box;
+}
+
+/* ========================================
+   CONTACT PHONE INPUT
+   ======================================== */
+
+.contact-phone-input {
+    display: flex;
+    align-items: stretch;
+
+    width: 100%;
+    height: 40px;
+
+    overflow: hidden;
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+
+    background: var(--background);
+    color: var(--foreground);
+
+    transition:
+        border-color 200ms ease,
+        box-shadow 200ms ease,
+        background-color 200ms ease;
+}
+
+/* Focus state */
+
+.contact-phone-input:focus-within {
+    border-color: var(--foreground);
+    box-shadow: 0 0 0 2px rgb(115 115 115 / 12%);
+}
+
+/* Error state */
+
+.contact-phone-input-error {
+    border-color: var(--danger);
+}
+
+.contact-phone-input-error:focus-within {
+    border-color: var(--danger);
+    box-shadow: 0 0 0 2px var(--danger-border);
+}
+
+/* ========================================
+   COUNTRY SELECTOR
+   ======================================== */
+
+.contact-phone-input .PhoneInputCountry {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    height: 100%;
+    margin: 0;
+    padding: 0 10px 0 11px;
+
+    background: var(--surface);
+
+    border-right: 1px solid var(--border);
+}
+
+.contact-phone-input .PhoneInputCountrySelect {
+    cursor: pointer;
+
+    height: 100%;
+
+    color: var(--foreground);
+
+    border: 0;
+    outline: 0;
+}
+
+.contact-phone-input .PhoneInputCountrySelect:focus-visible {
+    outline: none;
+}
+
+.contact-phone-input .PhoneInputCountrySelect:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* ========================================
+   COUNTRY FLAG
+   ======================================== */
+
+.contact-phone-input .PhoneInputCountryIcon {
+    width: 21px;
+    height: 15px;
+
+    overflow: hidden;
+
+    border-radius: 2px;
+}
+
+/* ========================================
+   COUNTRY SELECT ARROW
+   ======================================== */
+
+.contact-phone-input .PhoneInputCountrySelectArrow {
+    width: 6px;
+    height: 6px;
+
+    margin-left: 1px;
+
+    border-color: var(--muted);
+}
+
+/* ========================================
+   PHONE NUMBER INPUT
+   ======================================== */
+
+.contact-phone-input .PhoneInputInput {
+    min-width: 0;
+    width: 100%;
+    height: 100%;
+
+    flex: 1;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+    color: var(--foreground);
+
+    padding: 0 12px;
+
+    font-size: 0.875rem;
+}
+
+.contact-phone-input .PhoneInputInput::placeholder {
+    color: var(--muted);
+    opacity: 1;
+}
+
+.contact-phone-input .PhoneInputInput:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.contact-phone-input .PhoneInputInput:focus-visible {
+    outline: none;
+}
+
+/* ========================================
+   PHONE INPUT DISABLED STATE
+   ======================================== */
+
+.contact-phone-input:has(.PhoneInputInput:disabled) {
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+/* ========================================
+   CONTACT FORM STATUS
+   ======================================== */
+
+.contact-phone-input-error .PhoneInputCountry {
+    border-right-color: var(--danger-border);
+}
+
+/* ========================================
+   MOBILE
+   ======================================== */
+
+@media (max-width: 640px) {
+    .contact-phone-input .PhoneInputCountry {
+        padding-left: 9px;
+        padding-right: 8px;
+    }
+
+    .contact-phone-input .PhoneInputInput {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .contact-phone-input .PhoneInputCountryIcon {
+        width: 20px;
+        height: 14px;
+    }
 }
