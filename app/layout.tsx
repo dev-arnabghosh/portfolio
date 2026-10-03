@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 import { Geist, Geist_Mono } from "next/font/google";
 
@@ -8,6 +8,8 @@ import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 import "./globals.css";
 import Chatbot from "@/components/chat/Chatbot";
+import Preloader from "@/components/preloader/Preloader";
+import CopyProtection from "@/components/security/CopyProtection";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -68,6 +70,14 @@ export const metadata: Metadata = {
     },
 };
 
+export const viewport: Viewport = {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+};
+
+
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -108,6 +118,8 @@ export default function RootLayout({
                 />
 
                 <ThemeProvider>
+                    <CopyProtection />
+                    <Preloader />
                     {children}
                     <Chatbot />
                 </ThemeProvider>

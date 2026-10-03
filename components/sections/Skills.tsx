@@ -142,7 +142,7 @@ export default function Skills() {
             aria-labelledby="skills-heading"
             className="border-t border-border"
         >
-            <div className="mx-auto max-w-[var(--content-width)] px-5 py-[var(--space-section)] sm:px-6">
+            <div className="mx-auto max-w-(--content-width) px-5 py-(--space-section) sm:px-6">
                 {/* Section Header */}
                 <motion.div
                     variants={sectionVariants}
@@ -217,7 +217,7 @@ export default function Skills() {
                         duration: 0.65,
                         ease: [0.22, 1, 0.36, 1],
                     }}
-                    className="mb-6 overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface"
+                    className="mb-6 overflow-hidden rounded-lg border border-border bg-surface"
                 >
                     <div className="flex flex-col border-b border-border sm:flex-row sm:items-center sm:justify-between">
                         <div className="flex items-center gap-3 px-5 py-4 sm:px-6">
@@ -285,7 +285,7 @@ function SkillIcon({ skill, size = 32 }: { skill: Skill; size?: number }) {
 
     return (
         <div
-            className="flex shrink-0 items-center justify-center rounded-[var(--radius-sm)] border border-border bg-surface font-semibold text-foreground"
+            className="flex shrink-0 items-center justify-center rounded-sm border border-border bg-surface font-semibold text-foreground"
             style={{
                 width: size + 10,
                 height: size + 10,
@@ -368,7 +368,7 @@ function FeaturedSkill({ skill, index }: { skill: Skill; index: number }) {
                 {/* Technology tooltip */}
                 <div
                     role="tooltip"
-                    className="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-40 origin-bottom -translate-x-1/2 translate-y-2 rotate-[-8deg] scale-90 whitespace-nowrap rounded-[var(--radius-sm)] bg-foreground px-2.5 py-1.5 text-[11px] font-medium text-background opacity-0 shadow-sm transition-all duration-250 ease-out group-hover/technology:translate-y-0 group-hover/technology:rotate-0 group-hover/technology:scale-100 group-hover/technology:opacity-100"
+                    className="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-40 origin-bottom -translate-x-1/2 translate-y-2 rotate-[-8deg] scale-90 whitespace-nowrap rounded-sm bg-foreground px-2.5 py-1.5 text-[11px] font-medium text-background opacity-0 shadow-sm transition-all duration-250 ease-out group-hover/technology:translate-y-0 group-hover/technology:rotate-0 group-hover/technology:scale-100 group-hover/technology:opacity-100"
                 >
                     {skill.name}
                 </div>
@@ -419,7 +419,7 @@ function SkillCategoryCard({
             whileHover={{
                 y: -5,
             }}
-            className="group relative overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface p-5 transition-[border-color,box-shadow] duration-300 hover:border-foreground/40 hover:shadow-sm sm:p-6"
+            className="group relative overflow-hidden rounded-lg border border-border bg-surface p-5 transition-[border-color,box-shadow] duration-300 hover:border-foreground/40 hover:shadow-sm sm:p-6"
         >
             <div className="relative z-10">
                 {/* Category heading */}
@@ -445,7 +445,7 @@ function SkillCategoryCard({
                             duration: 0.2,
                             ease: "easeOut",
                         }}
-                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-border bg-background"
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-background"
                     >
                         <category.icon
                             size={16}
@@ -520,7 +520,7 @@ function SkillItem({ skill }: { skill: Skill }) {
                 duration: 0.2,
                 ease: "easeOut",
             }}
-            className="group/skill relative flex min-h-14 items-center gap-3 overflow-visible rounded-[var(--radius-md)] border border-border bg-background px-3 py-2.5 transition-[border-color,background-color,box-shadow] duration-250 hover:border-foreground/40 hover:bg-surface hover:shadow-sm"
+            className="group/skill relative flex min-h-14 items-center gap-3 overflow-visible rounded-md border border-border bg-background px-3 py-2.5 transition-[border-color,background-color,box-shadow] duration-250 hover:border-foreground/40 hover:bg-surface hover:shadow-sm"
         >
             {/* Technology hover area */}
             <div className="group/technology relative flex min-w-0 flex-1 items-center gap-3">
@@ -547,7 +547,7 @@ function SkillItem({ skill }: { skill: Skill }) {
                 {/* Technology tooltip */}
                 <div
                     role="tooltip"
-                    className="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-40 origin-bottom -translate-x-1/2 translate-y-2 rotate-[-8deg] scale-90 whitespace-nowrap rounded-[var(--radius-sm)] bg-foreground px-2.5 py-1.5 text-[11px] font-medium text-background opacity-0 shadow-sm transition-all duration-250 ease-out group-hover/technology:translate-y-0 group-hover/technology:rotate-0 group-hover/technology:scale-100 group-hover/technology:opacity-100"
+                    className="pointer-events-none absolute bottom-[calc(100%+8px)] left-1/2 z-40 origin-bottom -translate-x-1/2 translate-y-2 rotate-[-8deg] scale-90 whitespace-nowrap rounded-sm bg-foreground px-2.5 py-1.5 text-[11px] font-medium text-background opacity-0 shadow-sm transition-all duration-250 ease-out group-hover/technology:translate-y-0 group-hover/technology:rotate-0 group-hover/technology:scale-100 group-hover/technology:opacity-100"
                 >
                     {skill.name}
                 </div>

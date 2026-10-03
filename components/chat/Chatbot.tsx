@@ -10,6 +10,7 @@ import {
     useState,
     type FormEvent,
     type KeyboardEvent,
+    type PointerEvent,
     type ReactNode,
 } from "react";
 
@@ -25,7 +26,7 @@ type Theme = "light" | "dark";
 
 const STORAGE_KEY = "portfolio-chatbot-messages";
 
-const ICON_BASE_URL = "https://api.iconify.design/emojione-monotone:bug.svg";
+const ICON_BASE_URL = "https://api.iconify.design/emojione-monotone/bug.svg";
 
 const LIGHT_BUG_ICON = `${ICON_BASE_URL}?color=%23171717`;
 const DARK_BUG_ICON = `${ICON_BASE_URL}?color=%23f5f5f5`;
@@ -103,105 +104,231 @@ function formatInlineText(text: string): ReactNode[] {
 
     /*
      * Supports:
+     *
      * **bold**
+     * __bold__
+     * *italic*
+     * _italic_
+     * ***bold italic***
+     * ___bold italic___
      * `inline code`
-     * [link text](url)
+     * [link text](https://example.com)
      * https://example.com
+     *
+     * Also supports basic nested emphasis such as:
+     * **bold *italic***
+     * *italic **bold***
+     *
+     * Formatting is processed recursively so nested inline
+     * Markdown can be rendered correctly.
      */
 
-    const pattern = /(\*\*[^*]+\*\*|`[^`]+`|\[[^\]]+\]\((https?:\/\/[^)\s]+)\)|https?:\/\/[^\s]+)/g;
+    const pushText = (value: string, key: string) => {
+        if (!value) return;
 
-    let lastIndex = 0;
-    let match: RegExpExecArray | null;
-    let key = 0;
+        parts.push(
+            <Fragment key={key}>
+                {value}
+            </Fragment>,
+        );
+    };
 
-    while ((match = pattern.exec(text)) !== null) {
-        if (match.index > lastIndex) {
-            parts.push(
-                <Fragment key={`text-${key++}`}>{text.slice(lastIndex, match.index)}</Fragment>,
-            );
-        }
+    const renderInline = (
+        value: string,
+        parentKey = "inline",
+    ): ReactNode[] => {
+        const result: ReactNode[] = [];
 
-        const token = match[0];
+        /*
+         * Order matters:
+         * 1. Links
+         * 2. Inline code
+         * 3. Bold + italic
+         * 4. Bold
+         * 5. Italic
+         * 6. Plain URLs
+         */
+        const pattern =
+            /(\[[^\]]+\]\((https?:\/\/[^)\s]+)\)|`[^`\n]+`|(\*\*\*[^*\n]+\*\*\*|___[^_\n]+___)|(\*\*[^*\n]+\*\*|__[^_\n]+__)|(\*(?!\s|\*)[^*\n]+\*(?!\*)|_(?!\s|_)[^_\n]+_(?!_))|https?:\/\/[^\s<]+)/g;
 
-        /* ------------------------------------------------------
-           MARKDOWN LINK
-        ------------------------------------------------------ */
+        let lastIndex = 0;
+        let match: RegExpExecArray | null;
+        let key = 0;
 
-        if (token.startsWith("[") && token.includes("](")) {
-            const linkMatch = token.match(/^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/);
+        while ((match = pattern.exec(value)) !== null) {
+            if (match.index > lastIndex) {
+                result.push(
+                    <Fragment key={`${parentKey}-text-${key++}`}>
+                        {value.slice(lastIndex, match.index)}
+                    </Fragment>,
+                );
+            }
 
-            if (linkMatch) {
-                parts.push(
+            const token = match[0];
+
+            /*
+             * Markdown link
+             */
+            if (token.startsWith("[") && token.includes("](")) {
+                const linkMatch = token.match(
+                    /^\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/,
+                );
+
+                if (linkMatch) {
+                    result.push(
+                        <a
+                            key={`${parentKey}-link-${key++}`}
+                            href={linkMatch[2]}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline underline-offset-2 transition-opacity hover:opacity-70"
+                        >
+                            {renderInline(
+                                linkMatch[1],
+                                `${parentKey}-link`,
+                            )}
+                        </a>,
+                    );
+                }
+            }
+
+            /*
+             * Inline code
+             *
+             * Markdown inside code is intentionally NOT parsed.
+             */
+            else if (
+                token.startsWith("`") &&
+                token.endsWith("`")
+            ) {
+                result.push(
+                    <code
+                        key={`${parentKey}-code-${key++}`}
+                        className={[
+                            "rounded",
+                            "border border-border",
+                            "bg-background",
+                            "px-1.5 py-0.5",
+                            "font-mono text-[0.9em]",
+                        ].join(" ")}
+                    >
+                        {token.slice(1, -1)}
+                    </code>,
+                );
+            }
+
+            /*
+             * Bold + italic
+             *
+             * ***text***
+             * ___text___
+             */
+            else if (
+                (token.startsWith("***") &&
+                    token.endsWith("***")) ||
+                (token.startsWith("___") &&
+                    token.endsWith("___"))
+            ) {
+                result.push(
+                    <strong
+                        key={`${parentKey}-bold-italic-${key++}`}
+                        className="font-semibold"
+                    >
+                        <em className="italic">
+                            {renderInline(
+                                token.slice(3, -3),
+                                `${parentKey}-bold-italic`,
+                            )}
+                        </em>
+                    </strong>,
+                );
+            }
+
+            /*
+             * Bold
+             *
+             * **text**
+             * __text__
+             */
+            else if (
+                (token.startsWith("**") &&
+                    token.endsWith("**")) ||
+                (token.startsWith("__") &&
+                    token.endsWith("__"))
+            ) {
+                result.push(
+                    <strong
+                        key={`${parentKey}-bold-${key++}`}
+                        className="font-semibold"
+                    >
+                        {renderInline(
+                            token.slice(2, -2),
+                            `${parentKey}-bold`,
+                        )}
+                    </strong>,
+                );
+            }
+
+            /*
+             * Italic
+             *
+             * *text*
+             * _text_
+             */
+            else if (
+                (token.startsWith("*") &&
+                    token.endsWith("*")) ||
+                (token.startsWith("_") &&
+                    token.endsWith("_"))
+            ) {
+                result.push(
+                    <em
+                        key={`${parentKey}-italic-${key++}`}
+                        className="italic"
+                    >
+                        {renderInline(
+                            token.slice(1, -1),
+                            `${parentKey}-italic`,
+                        )}
+                    </em>,
+                );
+            }
+
+            /*
+             * Plain URL
+             */
+            else if (
+                token.startsWith("http://") ||
+                token.startsWith("https://")
+            ) {
+                result.push(
                     <a
-                        key={`link-${key++}`}
-                        href={linkMatch[2]}
+                        key={`${parentKey}-url-${key++}`}
+                        href={token}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="underline underline-offset-2 transition-opacity hover:opacity-70"
                     >
-                        {linkMatch[1]}
+                        {token}
                     </a>,
                 );
             }
-        } else if (token.startsWith("**") && token.endsWith("**")) {
 
-        /* ------------------------------------------------------
-           BOLD
-        ------------------------------------------------------ */
-            parts.push(
-                <strong
-                    key={`bold-${key++}`}
-                    className="font-semibold"
-                >
-                    {token.slice(2, -2)}
-                </strong>,
-            );
-        } else if (token.startsWith("`") && token.endsWith("`")) {
+            lastIndex = match.index + token.length;
+        }
 
-        /* ------------------------------------------------------
-           INLINE CODE
-        ------------------------------------------------------ */
-            parts.push(
-                <code
-                    key={`code-${key++}`}
-                    className={[
-                        "rounded",
-                        "border border-border",
-                        "bg-background",
-                        "px-1.5 py-0.5",
-                        "font-mono text-[0.9em]",
-                    ].join(" ")}
-                >
-                    {token.slice(1, -1)}
-                </code>,
-            );
-        } else if (token.startsWith("http://") || token.startsWith("https://")) {
-
-        /* ------------------------------------------------------
-           PLAIN URL
-        ------------------------------------------------------ */
-            parts.push(
-                <a
-                    key={`url-${key++}`}
-                    href={token}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline underline-offset-2 transition-opacity hover:opacity-70"
-                >
-                    {token}
-                </a>,
+        if (lastIndex < value.length) {
+            result.push(
+                <Fragment key={`${parentKey}-text-${key++}`}>
+                    {value.slice(lastIndex)}
+                </Fragment>,
             );
         }
 
-        lastIndex = match.index + token.length;
-    }
+        return result;
+    };
 
-    if (lastIndex < text.length) {
-        parts.push(<Fragment key={`text-${key++}`}>{text.slice(lastIndex)}</Fragment>);
-    }
-
-    return parts;
+    return renderInline(text);
 }
 
 function formatAssistantMessage(content: string): ReactNode {
@@ -296,6 +423,7 @@ function formatAssistantMessage(content: string): ReactNode {
 
         /* ------------------------------------------------------
            BULLET LIST
+
            Supports:
            - item
            * item
@@ -336,6 +464,7 @@ function formatAssistantMessage(content: string): ReactNode {
 
         /* ------------------------------------------------------
            MARKDOWN HEADINGS
+
            # Heading
            ## Heading
            ### Heading
@@ -360,9 +489,9 @@ function formatAssistantMessage(content: string): ReactNode {
 
         /* ------------------------------------------------------
            STANDALONE BOLD LINE
-           
+
            Example:
-           **Full Stack Developer — Wellness Web & Mobile (POC)** | ...
+           **Full Stack Developer — Wellness Web & Mobile (POC)**
         ------------------------------------------------------ */
 
         if (line.startsWith("**") && line.includes("**") && line.indexOf("**", 2) > 2) {
@@ -399,7 +528,9 @@ function formatAssistantMessage(content: string): ReactNode {
 
 export default function Chatbot() {
     const [isOpen, setIsOpen] = useState(false);
+
     const [messages, setMessages] = useState<ChatMessage[]>([INITIAL_MESSAGE]);
+
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [hasError, setHasError] = useState(false);
@@ -408,6 +539,118 @@ export default function Chatbot() {
 
     const inputRef = useRef<HTMLTextAreaElement | null>(null);
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+    /* ============================================================
+       MOVABLE CHAT BUBBLE
+    ============================================================ */
+
+    const [bubblePosition, setBubblePosition] = useState({
+        x: 0,
+        y: 0,
+    });
+
+    const bubbleDragRef = useRef({
+        isDragging: false,
+        hasMoved: false,
+        startPointerX: 0,
+        startPointerY: 0,
+        startX: 0,
+        startY: 0,
+    });
+
+    const handleBubblePointerDown = (event: PointerEvent<HTMLButtonElement>) => {
+        if (event.button !== 0) {
+            return;
+        }
+
+        bubbleDragRef.current = {
+            isDragging: true,
+            hasMoved: false,
+            startPointerX: event.clientX,
+            startPointerY: event.clientY,
+            startX: bubblePosition.x,
+            startY: bubblePosition.y,
+        };
+
+        event.currentTarget.setPointerCapture(event.pointerId);
+    };
+
+    const handleBubblePointerMove = (event: PointerEvent<HTMLButtonElement>) => {
+        if (!bubbleDragRef.current.isDragging) {
+            return;
+        }
+
+        const deltaX = event.clientX - bubbleDragRef.current.startPointerX;
+
+        const deltaY = event.clientY - bubbleDragRef.current.startPointerY;
+
+        if (Math.abs(deltaX) > 3 || Math.abs(deltaY) > 3) {
+            bubbleDragRef.current.hasMoved = true;
+        }
+
+        const isSmallScreen = window.innerWidth < 640;
+
+        const buttonSize = isSmallScreen ? 56 : 64;
+        const edgeMargin = isSmallScreen ? 16 : 24;
+
+        /*
+         * The bubble starts at:
+         *
+         * right: edgeMargin
+         * bottom: edgeMargin
+         *
+         * Therefore:
+         *
+         * X = 0
+         *     means original right position.
+         *
+         * Negative X
+         *     moves the bubble left.
+         *
+         * Positive X
+         *     would move it outside the viewport,
+         *     so positive X is not allowed.
+         *
+         * Same principle applies to Y.
+         */
+
+        const maxX = 0;
+        const maxY = 0;
+
+        const minX = -Math.max(0, window.innerWidth - buttonSize - edgeMargin * 2);
+
+        const minY = -Math.max(0, window.innerHeight - buttonSize - edgeMargin * 2);
+
+        const nextX = Math.min(Math.max(bubbleDragRef.current.startX + deltaX, minX), maxX);
+
+        const nextY = Math.min(Math.max(bubbleDragRef.current.startY + deltaY, minY), maxY);
+
+        setBubblePosition({
+            x: nextX,
+            y: nextY,
+        });
+    };
+
+    const handleBubblePointerUp = (event: PointerEvent<HTMLButtonElement>) => {
+        if (!bubbleDragRef.current.isDragging) {
+            return;
+        }
+
+        bubbleDragRef.current.isDragging = false;
+
+        if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+            event.currentTarget.releasePointerCapture(event.pointerId);
+        }
+
+        /*
+         * Only open/close Cracky when the interaction
+         * was a click rather than a drag.
+         */
+
+        if (!bubbleDragRef.current.hasMoved) {
+            setIsOpen((current) => !current);
+        }
+    };
 
     /* ============================================================
        THEME
@@ -628,7 +871,31 @@ export default function Chatbot() {
     };
 
     const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (event.key === "Enter" && !event.shiftKey) {
+        if (event.key !== "Enter") {
+            return;
+        }
+
+        /*
+         * MOBILE / TABLET
+         *
+         * Enter always creates a new line.
+         * The send button is used to submit.
+         */
+
+        const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
+        if (isMobile) {
+            return;
+        }
+
+        /*
+         * DESKTOP
+         *
+         * Enter = send
+         * Shift + Enter = new line
+         */
+
+        if (!event.shiftKey) {
             event.preventDefault();
 
             if (!isLoading) {
@@ -693,11 +960,14 @@ export default function Chatbot() {
 
             <div
                 className={[
-                    "group fixed right-4 bottom-4 z-[70]",
+                    "group fixed right-4 bottom-4 z-70",
                     "sm:right-6 sm:bottom-6",
-                    "transition-all duration-300 ease-out",
+                    "transition-opacity duration-300 ease-out",
                     isOpen ? "pointer-events-none scale-90 opacity-0" : "scale-100 opacity-100",
                 ].join(" ")}
+                style={{
+                    transform: `translate3d(${bubblePosition.x}px, ${bubblePosition.y}px, 0)`,
+                }}
             >
                 {/* Tooltip */}
 
@@ -733,7 +1003,10 @@ export default function Chatbot() {
 
                 <button
                     type="button"
-                    onClick={toggleChat}
+                    onPointerDown={handleBubblePointerDown}
+                    onPointerMove={handleBubblePointerMove}
+                    onPointerUp={handleBubblePointerUp}
+                    onPointerCancel={handleBubblePointerUp}
                     aria-label="Open Cracky portfolio assistant"
                     aria-expanded={isOpen}
                     className={[
@@ -744,11 +1017,14 @@ export default function Chatbot() {
                         "bg-button-foreground",
                         "text-button-background",
                         "shadow-lg",
+                        "touch-none",
+                        "cursor-grab",
                         "transition-all duration-300",
                         "hover:-translate-y-1",
                         "hover:scale-105",
                         "hover:shadow-xl",
                         "active:scale-95",
+                        "active:cursor-grabbing",
                         "focus:outline-none",
                         "focus-visible:ring-2",
                         "focus-visible:ring-foreground/30",
@@ -761,8 +1037,11 @@ export default function Chatbot() {
                         width={40}
                         height={40}
                         aria-hidden="true"
+                        draggable={false}
                         className={[
                             "relative z-10",
+                            "pointer-events-none",
+                            "select-none",
                             "transition-transform duration-300",
                             "group-hover:rotate-6",
                             "group-hover:scale-110",
@@ -777,9 +1056,9 @@ export default function Chatbot() {
 
             <div
                 className={[
-                    "fixed inset-x-3 bottom-3 z-[80]",
+                    "fixed inset-x-3 bottom-3 z-80",
                     "sm:right-6 sm:bottom-6 sm:left-auto",
-                    "w-auto sm:w-[420px]",
+                    "w-auto sm:w-105",
                     "origin-bottom-right",
                     "transition-all duration-300",
                     "ease-[cubic-bezier(0.22,1,0.36,1)]",
@@ -797,7 +1076,7 @@ export default function Chatbot() {
                         "border border-border",
                         "bg-background",
                         "shadow-2xl",
-                        "sm:h-[680px]",
+                        "sm:h-170",
                     ].join(" ")}
                 >
                     {/* ====================================================
@@ -833,6 +1112,7 @@ export default function Chatbot() {
                                     width={21}
                                     height={21}
                                     aria-hidden="true"
+                                    draggable={false}
                                 />
                             </div>
 
@@ -961,6 +1241,7 @@ export default function Chatbot() {
                                                         width={14}
                                                         height={14}
                                                         aria-hidden="true"
+                                                        draggable={false}
                                                     />
                                                 )}
                                             </div>
@@ -988,11 +1269,11 @@ export default function Chatbot() {
                                                 ].join(" ")}
                                             >
                                                 {isUser ? (
-                                                    <p className="whitespace-pre-wrap break-words">
+                                                    <p className="whitespace-pre-wrap wrap-break-word">
                                                         {message.content}
                                                     </p>
                                                 ) : (
-                                                    <div className="break-words">
+                                                    <div className="wrap-break-word">
                                                         {formatAssistantMessage(message.content)}
                                                     </div>
                                                 )}
@@ -1030,6 +1311,7 @@ export default function Chatbot() {
                                             width={14}
                                             height={14}
                                             aria-hidden="true"
+                                            draggable={false}
                                         />
                                     </div>
 
@@ -1096,28 +1378,25 @@ export default function Chatbot() {
                                 <span className="text-xs font-medium text-muted">Try asking</span>
                             </div>
 
-                            <div
-                                className={[
-                                    "flex gap-2 overflow-x-auto",
-                                    "pb-1 scrollbar-none",
-                                ].join(" ")}
-                            >
+                            <div className={["grid grid-cols-1 gap-2", "sm:grid-cols-2"].join(" ")}>
                                 {SUGGESTED_QUESTIONS.map((question) => (
                                     <button
                                         key={question}
                                         type="button"
                                         onClick={() => handleSuggestion(question)}
                                         className={[
-                                            "shrink-0 rounded-full",
+                                            "w-full",
+                                            "rounded-md",
                                             "border border-border",
                                             "bg-background",
-                                            "px-3 py-1.5",
-                                            "text-xs text-foreground",
+                                            "px-3 py-2",
+                                            "text-left text-xs leading-5",
+                                            "text-foreground",
                                             "transition-all duration-200",
                                             "hover:-translate-y-0.5",
                                             "hover:bg-surface",
                                             "hover:shadow-sm",
-                                            "active:scale-95",
+                                            "active:scale-[0.98]",
                                         ].join(" ")}
                                     >
                                         {question}
@@ -1184,7 +1463,7 @@ export default function Chatbot() {
                                 disabled={isLoading}
                                 aria-label="Message Cracky"
                                 className={[
-                                    "min-h-[36px] max-h-[120px]",
+                                    "min-h-9 max-h-30",
                                     "flex-1 resize-none",
                                     "bg-transparent",
                                     "px-1.5 py-2",
@@ -1204,8 +1483,6 @@ export default function Chatbot() {
                                     "flex h-9 w-9 shrink-0",
                                     "items-center justify-center",
                                     "rounded-md",
-                                    "bg-button-background",
-                                    "text-button-foreground",
                                     "transition-all duration-200",
                                     "hover:-translate-y-0.5",
                                     "hover:scale-105",
@@ -1214,6 +1491,8 @@ export default function Chatbot() {
                                     "disabled:opacity-30",
                                     "disabled:hover:translate-y-0",
                                     "disabled:hover:scale-100",
+                                    "bg-button-foreground",
+                                    "text-button-background",
                                 ].join(" ")}
                             >
                                 <Send
@@ -1225,7 +1504,11 @@ export default function Chatbot() {
 
                         <div className="mt-2 flex items-center justify-between px-1">
                             <span className="text-[10px] text-muted">
-                                Enter to send · Shift + Enter for new line
+                                <span className="hidden sm:inline">
+                                    Enter to send · Shift + Enter for new line
+                                </span>
+
+                                <span className="sm:hidden">Enter for new line</span>
                             </span>
 
                             <span className="text-[10px] text-muted">{input.length}/2000</span>
@@ -1243,7 +1526,7 @@ export default function Chatbot() {
                     type="button"
                     aria-label="Close Cracky"
                     onClick={() => setIsOpen(false)}
-                    className={["fixed inset-0 z-[75]", "bg-foreground/5", "sm:hidden"].join(" ")}
+                    className={["fixed inset-0 z-75", "bg-foreground/5", "sm:hidden"].join(" ")}
                 />
             )}
         </>

@@ -186,7 +186,7 @@ function ImpactCard({
                 duration: 0.25,
                 ease: "easeOut",
             }}
-            className="group relative overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface p-6 transition-[border-color,box-shadow] duration-300 hover:border-foreground/40 hover:shadow-sm sm:p-7"
+            className="group relative overflow-hidden rounded-lg border border-border bg-surface p-6 transition-[border-color,box-shadow] duration-300 hover:border-foreground/40 hover:shadow-sm sm:p-7"
         >
             {/* Card Content */}
             <div className="relative z-10">
@@ -206,7 +206,7 @@ function ImpactCard({
                             duration: 0.2,
                             ease: "easeOut",
                         }}
-                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-border bg-background"
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-background"
                     >
                         <ImpactIcon
                             size={16}
@@ -284,9 +284,9 @@ export default function Achievements() {
         <section
             id="achievements"
             aria-labelledby="achievements-heading"
-            className="relative border-t border-border pt-[var(--space-section)] pb-[var(--space-section)]"
+            className="relative border-t border-border pt-(--space-section) pb-(--space-section)"
         >
-            <div className="mx-auto w-full max-w-[var(--content-width)] px-5 sm:px-8 lg:px-10">
+            <div className="mx-auto w-full max-w-(--content-width) px-5 sm:px-8 lg:px-10">
                 {/* Section Header */}
                 <motion.div
                     variants={sectionVariants}
@@ -390,7 +390,7 @@ export default function Achievements() {
                                 once: true,
                                 amount: 0.1,
                             }}
-                            className="overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface"
+                            className="overflow-hidden rounded-lg border border-border bg-surface"
                         >
                             {achievements.awards.map((award, index) => (
                                 <motion.li
@@ -442,7 +442,7 @@ export default function Achievements() {
                                                 </h4>
 
                                                 {award.count && award.count > 1 && (
-                                                    <span className="rounded-[var(--radius-sm)] border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted">
+                                                    <span className="rounded-sm border border-border bg-background px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted">
                                                         ×{award.count}
                                                     </span>
                                                 )}

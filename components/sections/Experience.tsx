@@ -57,7 +57,7 @@ export default function Experience() {
             aria-labelledby="experience-heading"
             className="border-t border-border"
         >
-            <div className="mx-auto max-w-[var(--content-width)] px-6 py-[var(--space-section)]">
+            <div className="mx-auto max-w-(--content-width) px-6 py-(--space-section)">
                 {/* =====================================================
                     SECTION HEADER
                 ===================================================== */}
@@ -108,7 +108,7 @@ export default function Experience() {
                     {/* Background timeline */}
                     <div
                         aria-hidden="true"
-                        className="absolute bottom-0 left-[7px] top-0 w-px bg-border"
+                        className="absolute bottom-0 left-1.75 top-0 w-px bg-border"
                     />
 
                     {/* Scroll-driven progress line */}
@@ -118,7 +118,7 @@ export default function Experience() {
                             scaleY: smoothProgress,
                             transformOrigin: "top",
                         }}
-                        className="absolute bottom-0 left-[7px] top-0 w-px bg-foreground"
+                        className="absolute bottom-0 left-1.75 top-0 w-px bg-foreground"
                     />
 
                     <motion.div
@@ -212,7 +212,7 @@ function TimelineDot({
                 duration: 0.2,
                 ease: "easeOut",
             }}
-            className="absolute left-0 top-2 z-10 flex h-[15px] w-[15px] items-center justify-center rounded-full border-2 border-foreground bg-background"
+            className="absolute left-0 top-2 z-10 flex h-3.75 w-3.75 items-center justify-center rounded-full border-2 border-foreground bg-background"
             aria-hidden="true"
         >
             <motion.span
@@ -336,7 +336,7 @@ function MobileExperienceItem({
                 whileTap={{
                     scale: 0.99,
                 }}
-                className="rounded-[var(--radius-lg)] border border-border bg-surface p-6 transition-[border-color,box-shadow] duration-300 hover:border-foreground/40 hover:shadow-sm"
+                className="rounded-lg border border-border bg-surface p-6 transition-[border-color,box-shadow] duration-300 hover:border-foreground/40 hover:shadow-sm"
             >
                 <div className="flex flex-col gap-4">
                     <div>
@@ -494,7 +494,7 @@ function ExperienceCard({ item }: { item: (typeof experience)[number] }) {
                 duration: 0.25,
                 ease: "easeOut",
             }}
-            className="rounded-[var(--radius-lg)] border border-border bg-surface p-6 transition-[border-color,box-shadow] duration-300 hover:border-foreground/40 hover:shadow-sm sm:p-7 lg:p-8"
+            className="rounded-lg border border-border bg-surface p-6 transition-[border-color,box-shadow] duration-300 hover:border-foreground/40 hover:shadow-sm sm:p-7 lg:p-8"
         >
             {/* Role + Date */}
             <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDownToLine } from "lucide-react";
+import { Download } from "lucide-react";
 import { motion } from "motion/react";
 
 import { profile, sectionAvailability } from "@/lib/data";
@@ -14,7 +14,7 @@ export default function Hero() {
             aria-labelledby="hero-heading"
             className="relative overflow-hidden"
         >
-            <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-[var(--content-width)] items-center gap-12 px-6 py-20 md:grid-cols-[1.15fr_0.85fr] md:gap-16 lg:py-24">
+            <div className="mx-auto grid min-h-[calc(100vh-4rem)] max-w-(--content-width) items-center gap-12 px-6 py-20 md:grid-cols-[1.15fr_0.85fr] md:gap-16 lg:py-24">
                 {/* Content */}
                 <motion.div
                     initial={{ opacity: 0, y: 28 }}
@@ -80,14 +80,14 @@ export default function Hero() {
                         <a
                             href="/resume.pdf"
                             download
-                            className="group inline-flex min-h-11 items-center justify-center rounded-[var(--radius-md)] px-6 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
+                            className="group inline-flex min-h-11 items-center justify-center rounded-md px-6 text-sm font-medium transition-all duration-300 hover:-translate-y-0.5 hover:opacity-90"
                             style={{
                                 backgroundColor: "var(--foreground)",
                                 color: "var(--background)",
                             }}
                         >
-                            Download Resume
-                            <ArrowDownToLine
+                            Resume
+                            <Download
                                 size={16}
                                 strokeWidth={1.8}
                                 className="ml-2 transition-transform duration-300 group-hover:translate-y-0.5"
@@ -98,9 +98,9 @@ export default function Hero() {
                         {sectionAvailability.contact && (
                             <Link
                                 href="#contact"
-                                className="inline-flex min-h-11 items-center justify-center rounded-[var(--radius-md)] border border-border px-6 text-sm font-medium text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-surface"
+                                className="inline-flex min-h-11 items-center justify-center rounded-md border border-border px-6 text-sm font-medium text-foreground transition-all duration-300 hover:-translate-y-0.5 hover:bg-surface"
                             >
-                                Contact Me
+                                Connect
                             </Link>
                         )}
                     </motion.div>
@@ -135,9 +135,9 @@ export default function Hero() {
                             duration: 0.4,
                             ease: "easeOut",
                         }}
-                        className="relative w-full max-w-[420px] select-none"
+                        className="relative w-full max-w-105 select-none"
                     >
-                        <div className="overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface">
+                        <div className="overflow-hidden rounded-lg border border-border bg-surface">
                             <Image
                                 src="/images/arnab-ghosh.jpg"
                                 alt="Arnab Ghosh, Full Stack Developer"

@@ -141,10 +141,13 @@ export default function Navbar() {
         window.requestAnimationFrame(() => {
             const navbar = document.getElementById("portfolio-navbar");
             const navbarHeight = navbar?.getBoundingClientRect().height ?? 64;
-            const targetScrollY = Math.max(
-                0,
-                target.getBoundingClientRect().top + window.scrollY - navbarHeight + 64,
-            );
+            const targetScrollY =
+                sectionId === "about"
+                    ? 0
+                    : Math.max(
+                          0,
+                          target.getBoundingClientRect().top + window.scrollY - navbarHeight + 64,
+                      );
             window.scrollTo({ top: targetScrollY, behavior: "smooth" });
             monitorNavigation(sectionId, targetScrollY);
         });
@@ -175,7 +178,7 @@ export default function Navbar() {
             >
                 {" "}
                 <nav
-                    className="mx-auto max-w-[var(--content-width)] px-6"
+                    className="mx-auto max-w-(--content-width) px-6"
                     aria-label="Main navigation"
                 >
                     {" "}
@@ -185,7 +188,7 @@ export default function Navbar() {
                         <Link
                             href="/"
                             onClick={handleBrandClick}
-                            className="group relative text-lg font-bold tracking-tight"
+                            className="group relative text-lg font-extrabold tracking-tight italic"
                             aria-label="Arnab Ghosh - Home"
                         >
                             {" "}
@@ -233,7 +236,7 @@ export default function Navbar() {
                                 onClick={() => setIsMenuOpen(true)}
                                 aria-label="Open navigation menu"
                                 aria-expanded={isMenuOpen}
-                                className="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] text-foreground transition-colors duration-200 hover:bg-surface"
+                                className="inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground transition-colors duration-200 hover:bg-surface"
                             >
                                 {" "}
                                 <Menu
@@ -258,16 +261,16 @@ export default function Navbar() {
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.2 }}
                             onClick={() => setIsMenuOpen(false)}
-                            className="fixed inset-0 z-[60] bg-black/30 md:hidden"
+                            className="fixed inset-0 z-60 bg-(--backdrop) backdrop-blur-sm md:hidden"
                             aria-hidden="true"
                         />{" "}
-                        {/* ================================================= RIGHT SIDE MOBILE SLIDER 50% WIDTH ================================================== */}{" "}
+                        {/* ================================================= RIGHT SIDE MOBILE SLIDER 60% WIDTH ================================================== */}{" "}
                         <motion.aside
                             initial={{ x: "100%" }}
                             animate={{ x: 0 }}
                             exit={{ x: "100%" }}
                             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                            className="fixed right-0 top-0 z-[70] flex h-dvh w-1/2 flex-col border-l border-border bg-background shadow-2xl md:hidden"
+                            className="fixed right-0 top-0 z-70 flex h-dvh w-[60%] flex-col border-l border-border bg-background shadow-2xl md:hidden"
                             aria-label="Mobile navigation"
                         >
                             {" "}
@@ -279,7 +282,7 @@ export default function Navbar() {
                                     whileTap={{ scale: 0.9 }}
                                     onClick={() => setIsMenuOpen(false)}
                                     aria-label="Close navigation menu"
-                                    className="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] text-foreground transition-colors duration-200 hover:bg-surface"
+                                    className="inline-flex h-10 w-10 items-center justify-center rounded-md text-foreground transition-colors duration-200 hover:bg-surface"
                                 >
                                     {" "}
                                     <X
@@ -305,8 +308,8 @@ export default function Navbar() {
                                                 initial={{ opacity: 0, x: 15 }}
                                                 animate={{ opacity: 1, x: 0 }}
                                                 transition={{
-                                                    delay: index * 0.03,
-                                                    duration: 0.2,
+                                                    delay: index * 0.05,
+                                                    duration: 0.25,
                                                     ease: "easeOut",
                                                 }}
                                             >
@@ -317,7 +320,7 @@ export default function Navbar() {
                                                         handleNavigation(event, item.href)
                                                     }
                                                     aria-current={isActive ? "page" : undefined}
-                                                    className={`block rounded-[var(--radius-md)] px-3 py-3 text-sm transition-colors duration-200 ${isActive ? "bg-surface font-semibold text-foreground" : "text-muted-foreground hover:bg-surface hover:text-foreground"}`}
+                                                    className={`block rounded-md px-3 py-3 text-sm transition-colors duration-200 ${isActive ? "bg-surface font-semibold text-foreground" : "text-muted-foreground hover:bg-surface hover:text-foreground"}`}
                                                 >
                                                     {" "}
                                                     {item.label}{" "}

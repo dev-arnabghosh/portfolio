@@ -27,6 +27,8 @@
 
     --space-section: 120px;
     --content-width: 1200px;
+
+    --backdrop: rgb(23 23 23 / 70%);
 }
 
 [data-theme="dark"] {
@@ -45,21 +47,23 @@
 
     --button-background: #f5f5f5;
     --button-foreground: #0a0a0a;
+
+    --backdrop: rgb(245 245 245 / 20%);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-surface: var(--surface);
-  --color-border: var(--border);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-surface: var(--surface);
+    --color-border: var(--border);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
 
-  --color-button-background: var(--button-foreground);
-  --color-button-foreground: var(--button-background);
+    --color-button-background: var(--button-foreground);
+    --color-button-foreground: var(--button-background);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
 }
 
 * {
@@ -68,6 +72,9 @@
 
 html {
     scroll-behavior: smooth;
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
 }
 
 body {
@@ -105,4 +112,23 @@ a {
 ::selection {
     background: var(--foreground);
     color: var(--background);
+}
+
+/* ======================================== CUSTOM SCROLLBAR ======================================== */ /* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--muted);
+    border: 1px solid transparent;
+    background-clip: padding-box;
 }

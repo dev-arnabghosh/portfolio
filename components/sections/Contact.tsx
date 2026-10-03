@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Mail, MapPin, Phone, Send } from "lucide-react";
+import { ArrowUpRight, Download, Mail, MapPin, Phone, Send } from "lucide-react";
 
 import { motion, type Variants } from "motion/react";
 
@@ -63,9 +63,9 @@ export default function Contact() {
         <section
             id="contact"
             aria-labelledby="contact-heading"
-            className="relative border-t border-border pt-[var(--space-section)] pb-[var(--space-section)]"
+            className="relative overflow-x-clip border-t border-border pt-(--space-section) pb-(--space-section)"
         >
-            <div className="mx-auto w-full max-w-[var(--content-width)] px-5 sm:px-6">
+            <div className="mx-auto w-full min-w-0 max-w-(--content-width) overflow-x-clip px-5 sm:px-6">
                 {/* Section Header */}
                 <motion.div
                     variants={sectionVariants}
@@ -131,14 +131,14 @@ export default function Contact() {
                         once: true,
                         amount: 0.15,
                     }}
-                    className="grid gap-5 lg:grid-cols-[1.15fr_0.85fr]"
+                    className="grid min-w-0 gap-5 lg:grid-cols-[1.15fr_0.85fr]"
                 >
                     {/* Primary Contact Card */}
                     <motion.div
                         variants={contactItemVariants}
-                        className="relative overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface p-7 sm:p-9"
+                        className="min-w-0 overflow-hidden rounded-lg border border-border bg-surface p-7 sm:p-9"
                     >
-                        <div className="relative z-10">
+                        <div className="relative z-10 flex h-full flex-col">
                             <p className="text-sm font-medium uppercase tracking-[0.16em] text-muted">
                                 Get in touch
                             </p>
@@ -153,9 +153,11 @@ export default function Contact() {
                                 collaborations.
                             </p>
 
-                            {hasEmail && (
+                            {/* Resume CTA */}
+                            <div className="mt-8">
                                 <motion.a
-                                    href={`mailto:${profile.email}`}
+                                    href="/resume.pdf"
+                                    download
                                     whileHover={{
                                         y: -2,
                                     }}
@@ -165,28 +167,27 @@ export default function Contact() {
                                     transition={{
                                         duration: 0.2,
                                     }}
-                                    className="mt-8 inline-flex items-center gap-2.5 rounded-[var(--radius-md)] bg-button-background px-5 py-3 text-sm font-medium text-button-foreground"
+                                    className="inline-flex items-center gap-2.5 rounded-md px-5 py-3 text-sm font-medium transition-opacity hover:opacity-90"
+                                    style={{
+                                        backgroundColor: "var(--foreground)",
+                                        color: "var(--background)",
+                                    }}
                                 >
-                                    <Mail
+                                    <Download
                                         size={16}
                                         strokeWidth={1.8}
                                         aria-hidden="true"
                                     />
-                                    Email Me
-                                    <ArrowUpRight
-                                        size={15}
-                                        strokeWidth={1.8}
-                                        aria-hidden="true"
-                                    />
+                                    Resume
                                 </motion.a>
-                            )}
+                            </div>
                         </div>
                     </motion.div>
 
                     {/* Contact Details */}
                     <motion.div
                         variants={contactItemVariants}
-                        className="rounded-[var(--radius-lg)] border border-border bg-surface"
+                        className="min-w-0 overflow-hidden rounded-lg border border-border bg-surface"
                     >
                         <div className="divide-y divide-border">
                             {hasEmail && (
@@ -217,7 +218,7 @@ export default function Contact() {
 
                             {hasLinkedin && linkedin && (
                                 <ContactItem
-                                    iconUrl="https://api.iconify.design/mdi:linkedin.svg?color=%230A66C2"
+                                    iconUrl="https://api.iconify.design/mdi/linkedin.svg?color=%230A66C2"
                                     label="LinkedIn"
                                     value="LinkedIn Profile"
                                     href={
@@ -231,7 +232,7 @@ export default function Contact() {
 
                             {hasGithub && github && (
                                 <ContactItem
-                                    iconUrl="https://api.iconify.design/simple-icons:github.svg?color=%23666666"
+                                    iconUrl="https://api.iconify.design/simple-icons/github.svg?color=%23666666"
                                     label="GitHub"
                                     value="GitHub Profile"
                                     href={github.startsWith("http") ? github : `https://${github}`}
@@ -262,7 +263,7 @@ function ContactItem({
     external?: boolean;
 }) {
     const content = (
-        <div className="group flex items-center gap-4 p-5 sm:p-6">
+        <div className="group flex min-w-0 items-center gap-4 p-5 sm:p-6">
             <motion.div
                 whileHover={{
                     scale: 1.08,
@@ -272,7 +273,7 @@ function ContactItem({
                     duration: 0.2,
                     ease: "easeOut",
                 }}
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-border bg-background"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md border border-border bg-background"
             >
                 {iconUrl ? (
                     <img
@@ -320,6 +321,7 @@ function ContactItem({
             href={href}
             target={external ? "_blank" : undefined}
             rel={external ? "noopener noreferrer" : undefined}
+            className="block min-w-0"
         >
             {content}
         </a>

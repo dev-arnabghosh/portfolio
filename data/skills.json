@@ -1,135 +1,134 @@
 {
-  "languages": [
-    {
-      "name": "Java",
-      "icon": "https://api.iconify.design/devicon:java.svg"
-    },
-    {
-      "name": "JavaScript",
-      "icon": "https://api.iconify.design/devicon:javascript.svg"
-    },
-    {
-      "name": "TypeScript",
-      "icon": "https://api.iconify.design/devicon:typescript.svg"
-    },
-    {
-      "name": "SQL",
-      "icon": "https://api.iconify.design/vscode-icons:file-type-plsql.svg"
-    }
-  ],
-  "backend": [
-    {
-      "name": "Spring Framework",
-      "icon": "https://api.iconify.design/devicon:spring.svg"
-    },
-    {
-      "name": "Spring Boot",
-      "icon": "https://api.iconify.design/simple-icons:springboot.svg?color=%236db33f"
-    },
-    {
-      "name": "Spring MVC",
-      "icon": "https://api.iconify.design/thesvg:spring.svg?color=%231976D2"
-    },
-    {
-      "name": "Spring Data JPA",
-      "icon": "https://api.iconify.design/thesvg:spring.svg?color=%23F57C00"
-    },
-    {
-      "name": "Hibernate",
-      "icon": "https://api.iconify.design/devicon:hibernate.svg"
-    },
-    {
-      "name": "REST APIs",
-      "icon": "https://api.iconify.design/logos:swagger.svg"
-    },
-    {
-      "name": "Microservices",
-      "icon": "https://api.iconify.design/carbon:microservices-1.svg?color=%2300ACC1"
-    }
-  ],
-  "frontendAndMobile": [
-    {
-      "name": "React",
-      "icon": "https://api.iconify.design/devicon:react.svg"
-    },
-    {
-      "name": "Redux",
-      "icon": "https://api.iconify.design/devicon:redux.svg"
-    },
-    {
-      "name": "React Native",
-      "icon": "https://api.iconify.design/catppuccin:typescript-react.svg"
-    },
-    {
-      "name": "HTML5",
-      "icon": "https://api.iconify.design/devicon:html5.svg"
-    },
-    {
-      "name": "CSS3",
-      "icon": "https://api.iconify.design/devicon:css3.svg"
-    }
-  ],
-  "databases": [
-    {
-      "name": "Oracle",
-      "icon": "https://api.iconify.design/simple-icons:oracle.svg?color=%23C74634"
-      
-    },
-    {
-      "name": "PostgreSQL",
-      "icon": "https://api.iconify.design/logos:postgresql.svg"
-    },
-    {
-      "name": "MySQL",
-      "icon": "https://api.iconify.design/logos:mysql.svg"
-    },
-    {
-      "name": "PL/SQL",
-      "icon":"https://api.iconify.design/mdi:database-outline.svg?color=%23C74634"
-    }
-  ],
-  "toolsAndDevelopment": [
-    {
-      "name": "Git",
-      "icon": "https://api.iconify.design/devicon:git.svg"
-    },
-    {
-      "name": "GitHub",
-      "icon": "https://api.iconify.design/simple-icons:github.svg?color=%23666666"
-    },
-    {
-      "name": "Maven",
-      "icon": "https://api.iconify.design/devicon:maven.svg"
-    },
-    {
-      "name": "Postman",
-      "icon": "https://api.iconify.design/devicon:postman.svg"
-    },
-    {
-      "name": "Thunder Client",
-      "icon": "https://api.iconify.design/bitcoin-icons:lightning-circle-outline.svg?color=%237E57C2"
-    }
-  ],
-  "practices": [
-    {
-      "name": "Agile",
-      "icon": "https://api.iconify.design/mdi:sync.svg?color=%23009688"
-    },
-    {
-      "name": "Scrum",
-      "icon": "https://api.iconify.design/mdi:clipboard-check-outline.svg?color=%23E67E22"
-    },
-    {
-      "name": "SDLC",
-      "icon": "https://api.iconify.design/mdi:sync.svg?color=%237E57C2"
-    },
-    {
-      "name": "Code Review",
-      "icon": "https://api.iconify.design/mdi:code-tags-check.svg?color=%231976D2"
-    },
-    {
-      "name": "Debugging",
-      "icon": "https://api.iconify.design/mdi:bug-check-outline.svg?color=%23E53935"
-    }
-  ]
+    "languages": [
+        {
+            "name": "Java",
+            "icon": "https://api.iconify.design/devicon/java.svg"
+        },
+        {
+            "name": "JavaScript",
+            "icon": "https://api.iconify.design/devicon/javascript.svg"
+        },
+        {
+            "name": "TypeScript",
+            "icon": "https://api.iconify.design/devicon/typescript.svg"
+        },
+        {
+            "name": "SQL",
+            "icon": "https://api.iconify.design/vscode-icons/file-type-plsql.svg"
+        }
+    ],
+    "backend": [
+        {
+            "name": "Spring Framework",
+            "icon": "https://api.iconify.design/devicon/spring.svg"
+        },
+        {
+            "name": "Spring Boot",
+            "icon": "https://api.iconify.design/simple-icons/springboot.svg?color=%236db33f"
+        },
+        {
+            "name": "Spring MVC",
+            "icon": "https://api.iconify.design/thesvg/spring.svg?color=%231976D2"
+        },
+        {
+            "name": "Spring Data JPA",
+            "icon": "https://api.iconify.design/thesvg/spring.svg?color=%23F57C00"
+        },
+        {
+            "name": "Hibernate",
+            "icon": "https://api.iconify.design/devicon/hibernate.svg"
+        },
+        {
+            "name": "REST APIs",
+            "icon": "https://api.iconify.design/logos/swagger.svg"
+        },
+        {
+            "name": "Microservices",
+            "icon": "https://api.iconify.design/carbon/microservices-1.svg?color=%2300ACC1"
+        }
+    ],
+    "frontendAndMobile": [
+        {
+            "name": "React",
+            "icon": "https://api.iconify.design/devicon/react.svg"
+        },
+        {
+            "name": "Redux",
+            "icon": "https://api.iconify.design/devicon/redux.svg"
+        },
+        {
+            "name": "React Native",
+            "icon": "https://api.iconify.design/catppuccin/typescript-react.svg"
+        },
+        {
+            "name": "HTML5",
+            "icon": "https://api.iconify.design/devicon/html5.svg"
+        },
+        {
+            "name": "CSS3",
+            "icon": "https://api.iconify.design/devicon/css3.svg"
+        }
+    ],
+    "databases": [
+        {
+            "name": "Oracle",
+            "icon": "https://api.iconify.design/simple-icons/oracle.svg?color=%23C74634"
+        },
+        {
+            "name": "PostgreSQL",
+            "icon": "https://api.iconify.design/logos/postgresql.svg"
+        },
+        {
+            "name": "MySQL",
+            "icon": "https://api.iconify.design/logos/mysql.svg"
+        },
+        {
+            "name": "PL/SQL",
+            "icon": "https://api.iconify.design/mdi/database-outline.svg?color=%23C74634"
+        }
+    ],
+    "toolsAndDevelopment": [
+        {
+            "name": "Git",
+            "icon": "https://api.iconify.design/devicon/git.svg"
+        },
+        {
+            "name": "GitHub",
+            "icon": "https://api.iconify.design/simple-icons/github.svg?color=%23666666"
+        },
+        {
+            "name": "Maven",
+            "icon": "https://api.iconify.design/devicon/maven.svg"
+        },
+        {
+            "name": "Postman",
+            "icon": "https://api.iconify.design/devicon/postman.svg"
+        },
+        {
+            "name": "Thunder Client",
+            "icon": "https://api.iconify.design/bitcoin-icons/lightning-circle-outline.svg?color=%237E57C2"
+        }
+    ],
+    "practices": [
+        {
+            "name": "Agile",
+            "icon": "https://api.iconify.design/mdi/sync.svg?color=%23009688"
+        },
+        {
+            "name": "Scrum",
+            "icon": "https://api.iconify.design/mdi/clipboard-check-outline.svg?color=%23E67E22"
+        },
+        {
+            "name": "SDLC",
+            "icon": "https://api.iconify.design/mdi/sync.svg?color=%237E57C2"
+        },
+        {
+            "name": "Code Review",
+            "icon": "https://api.iconify.design/mdi/code-tags-check.svg?color=%231976D2"
+        },
+        {
+            "name": "Debugging",
+            "icon": "https://api.iconify.design/mdi/bug-check-outline.svg?color=%23E53935"
+        }
+    ]
 }

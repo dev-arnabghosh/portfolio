@@ -71,9 +71,9 @@ export default function Education() {
         <section
             id="education"
             aria-labelledby="education-heading"
-            className="relative border-t border-border pt-[var(--space-section)] pb-[var(--space-section)]"
+            className="relative border-t border-border pt-(--space-section) pb-(--space-section)"
         >
-            <div className="mx-auto w-full max-w-[var(--content-width)] px-5 sm:px-6">
+            <div className="mx-auto w-full max-w-(--content-width) px-5 sm:px-6">
                 {/* Section Header */}
                 <motion.div
                     initial={{
@@ -151,7 +151,7 @@ export default function Education() {
                     {/* Featured Education */}
                     <motion.article
                         variants={featuredVariants}
-                        className="group relative overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface transition-colors duration-300"
+                        className="group relative overflow-hidden rounded-lg border border-border bg-surface transition-colors duration-300"
                     >
                         <div className="grid lg:grid-cols-[1fr_auto]">
                             {/* Main Content */}
@@ -160,7 +160,7 @@ export default function Education() {
                                 <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
                                     <div className="flex items-start gap-4">
                                         <motion.div
-                                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-sm)] border border-border bg-background"
+                                            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-sm border border-border bg-background"
                                             whileHover={{
                                                 scale: 1.08,
                                                 rotate: 5,
@@ -230,7 +230,7 @@ export default function Education() {
 
                                 {/* Institution & University */}
                                 <div className="mt-7 grid gap-4 sm:mt-8 sm:grid-cols-2 sm:gap-5">
-                                    <div className="flex items-start gap-3 rounded-[var(--radius-sm)] border border-border bg-background p-4">
+                                    <div className="flex items-start gap-3 rounded-sm border border-border bg-background p-4">
                                         <University
                                             size={17}
                                             strokeWidth={1.7}
@@ -249,7 +249,7 @@ export default function Education() {
                                         </div>
                                     </div>
 
-                                    <div className="flex items-start gap-3 rounded-[var(--radius-sm)] border border-border bg-background p-4">
+                                    <div className="flex items-start gap-3 rounded-sm border border-border bg-background p-4">
                                         <School
                                             size={17}
                                             strokeWidth={1.7}
@@ -374,7 +374,7 @@ export default function Education() {
                                                             whileHover={{
                                                                 y: -2,
                                                             }}
-                                                            className="rounded-[var(--radius-sm)] border border-border bg-background px-3 py-1.5 text-xs font-medium transition-colors duration-200 hover:border-foreground"
+                                                            className="rounded-sm border border-border bg-background px-3 py-1.5 text-xs font-medium transition-colors duration-200 hover:border-foreground"
                                                         >
                                                             {course}
                                                         </motion.span>
@@ -440,7 +440,7 @@ export default function Education() {
                                             duration: 0.25,
                                             ease: "easeOut",
                                         }}
-                                        className="group relative overflow-hidden rounded-[var(--radius-lg)] border border-border bg-surface p-6 transition-colors duration-300 hover:border-foreground sm:p-7"
+                                        className="group relative overflow-hidden rounded-lg border border-border bg-surface p-6 transition-colors duration-300 hover:border-foreground sm:p-7"
                                     >
                                         {/* Bottom Hover Line */}
                                         <motion.div
@@ -461,7 +461,7 @@ export default function Education() {
                                         <div className="flex items-start justify-between gap-4">
                                             <div className="flex min-w-0 items-start gap-3.5">
                                                 <motion.div
-                                                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[var(--radius-sm)] border border-border bg-background"
+                                                    className="flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-border bg-background"
                                                     whileHover={{
                                                         scale: 1.08,
                                                         rotate: 5,
