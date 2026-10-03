@@ -212,11 +212,21 @@ export default function Navbar() {
                                         href={item.href}
                                         onClick={(event) => handleNavigation(event, item.href)}
                                         aria-current={isActive ? "page" : undefined}
-                                        className={`group relative py-2 text-sm transition-colors duration-200 ${isActive ? "font-semibold text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+                                        className={`group relative py-2 text-sm ${
+                                            isActive
+                                                ? "font-semibold text-foreground"
+                                                : "text-muted-foreground"
+                                        }`}
                                     >
-                                        {" "}
-                                        {item.label}{" "}
-                                        <span className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-foreground transition-transform duration-250 ease-out group-hover:scale-x-100" />{" "}
+                                        {item.label}
+
+                                        <span
+                                            className={`pointer-events-none absolute -bottom-0.5 left-1/2 h-0.5 w-[calc(100%+6px)] origin-left -translate-x-1/2 bg-foreground transition-transform duration-250 ease-out will-change-transform ${
+                                                isActive
+                                                    ? "scale-x-100"
+                                                    : "scale-x-0 group-hover:scale-x-100"
+                                            }`}
+                                        />
                                     </Link>
                                 );
                             })}{" "}
