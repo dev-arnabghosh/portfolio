@@ -4,6 +4,8 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 
 const ANIMATION_DURATION = 2200;
+const EXIT_DURATION = 500;
+const EXIT_DELAY = 300;
 
 export default function Preloader() {
     const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +47,11 @@ export default function Preloader() {
     }, [pageLoaded, animationFinished]);
 
     return (
-        <AnimatePresence>
+        <AnimatePresence
+            onExitComplete={() => {
+                window.dispatchEvent(new Event("preloaderComplete"));
+            }}
+        >
             {isLoading && (
                 <motion.div
                     className="fixed inset-0 z-9999 flex items-center justify-center bg-background"
@@ -53,8 +59,8 @@ export default function Preloader() {
                     exit={{
                         opacity: 0,
                         transition: {
-                            delay: 0.3,
-                            duration: 0.5,
+                            delay: EXIT_DELAY / 1000,
+                            duration: EXIT_DURATION / 1000,
                             ease: [0.22, 1, 0.36, 1],
                         },
                     }}

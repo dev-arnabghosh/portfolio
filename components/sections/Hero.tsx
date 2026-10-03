@@ -4,10 +4,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { Download } from "lucide-react";
 import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 
 import { profile, sectionAvailability } from "@/lib/data";
 
 export default function Hero() {
+    const [isPreloaderComplete, setIsPreloaderComplete] = useState(false);
+
+    useEffect(() => {
+        const handlePreloaderComplete = () => {
+            setIsPreloaderComplete(true);
+        };
+
+        window.addEventListener("preloaderComplete", handlePreloaderComplete);
+
+        return () => {
+            window.removeEventListener("preloaderComplete", handlePreloaderComplete);
+        };
+    }, []);
+
     return (
         <section
             id="about"
@@ -18,8 +33,7 @@ export default function Hero() {
                 {/* Content */}
                 <motion.div
                     initial={{ opacity: 0, y: 28 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
+                    animate={isPreloaderComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
                     transition={{
                         duration: 0.7,
                         ease: [0.22, 1, 0.36, 1],
@@ -28,9 +42,11 @@ export default function Hero() {
                 >
                     <motion.p
                         initial={{ opacity: 0, y: 12 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1, duration: 0.5 }}
+                        animate={isPreloaderComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+                        transition={{
+                            delay: 0.1,
+                            duration: 0.5,
+                        }}
                         className="mb-5 text-sm font-medium uppercase tracking-[0.18em] text-muted"
                     >
                         {profile.title}
@@ -39,9 +55,11 @@ export default function Hero() {
                     <motion.h1
                         id="hero-heading"
                         initial={{ opacity: 0, y: 18 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.15, duration: 0.6 }}
+                        animate={isPreloaderComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+                        transition={{
+                            delay: 0.15,
+                            duration: 0.6,
+                        }}
                         className="text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl"
                     >
                         {profile.name}
@@ -49,9 +67,11 @@ export default function Hero() {
 
                     <motion.p
                         initial={{ opacity: 0, y: 18 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.22, duration: 0.6 }}
+                        animate={isPreloaderComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+                        transition={{
+                            delay: 0.22,
+                            duration: 0.6,
+                        }}
                         className="mt-5 max-w-2xl text-xl font-medium leading-relaxed text-muted-foreground sm:text-2xl"
                     >
                         {profile.headline}
@@ -59,9 +79,11 @@ export default function Hero() {
 
                     <motion.p
                         initial={{ opacity: 0, y: 18 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.29, duration: 0.6 }}
+                        animate={isPreloaderComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+                        transition={{
+                            delay: 0.29,
+                            duration: 0.6,
+                        }}
                         className="mt-6 max-w-xl text-base leading-7 text-muted-foreground"
                     >
                         Full Stack Developer with {profile.experience} of experience building web
@@ -72,9 +94,11 @@ export default function Hero() {
                     {/* Actions */}
                     <motion.div
                         initial={{ opacity: 0, y: 18 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.36, duration: 0.6 }}
+                        animate={isPreloaderComplete ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
+                        transition={{
+                            delay: 0.36,
+                            duration: 0.6,
+                        }}
                         className="mt-8 flex flex-col gap-3 sm:flex-row"
                     >
                         <a
@@ -113,15 +137,19 @@ export default function Hero() {
                         scale: 0.94,
                         x: 24,
                     }}
-                    whileInView={{
-                        opacity: 1,
-                        scale: 1,
-                        x: 0,
-                    }}
-                    viewport={{
-                        once: true,
-                        amount: 0.3,
-                    }}
+                    animate={
+                        isPreloaderComplete
+                            ? {
+                                  opacity: 1,
+                                  scale: 1,
+                                  x: 0,
+                              }
+                            : {
+                                  opacity: 0,
+                                  scale: 0.94,
+                                  x: 24,
+                              }
+                    }
                     transition={{
                         duration: 0.8,
                         delay: 0.15,
