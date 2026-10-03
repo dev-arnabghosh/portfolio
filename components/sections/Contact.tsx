@@ -218,7 +218,7 @@ export default function Contact() {
 
                             {hasLinkedin && linkedin && (
                                 <ContactItem
-                                    iconUrl="https://api.iconify.design/mdi/linkedin.svg?color=%230A66C2"
+                                    iconUrl="https://api.iconify.design/mdi/linkedin.svg?color=%23808080"
                                     label="LinkedIn"
                                     value="LinkedIn Profile"
                                     href={
@@ -232,7 +232,7 @@ export default function Contact() {
 
                             {hasGithub && github && (
                                 <ContactItem
-                                    iconUrl="https://api.iconify.design/simple-icons/github.svg?color=%23666666"
+                                    iconUrl="https://api.iconify.design/simple-icons/github.svg?color=%23808080"
                                     label="GitHub"
                                     value="GitHub Profile"
                                     href={github.startsWith("http") ? github : `https://${github}`}

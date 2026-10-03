@@ -82,7 +82,7 @@ export default function Footer() {
                                     plain
                                 >
                                     <img
-                                        src="https://api.iconify.design/mdi/linkedin.svg?color=%230A66C2"
+                                        src="https://api.iconify.design/mdi/linkedin.svg?color=%23808080"
                                         alt=""
                                         width={36}
                                         height={36}
@@ -99,7 +99,7 @@ export default function Footer() {
                                     plain
                                 >
                                     <img
-                                        src="https://api.iconify.design/simple-icons/github.svg?color=%23666666"
+                                        src="https://api.iconify.design/simple-icons/github.svg?color=%23808080"
                                         alt=""
                                         width={36}
                                         height={36}

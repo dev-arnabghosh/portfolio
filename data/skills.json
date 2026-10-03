@@ -2,133 +2,134 @@
     "languages": [
         {
             "name": "Java",
-            "icon": "https://api.iconify.design/devicon/java.svg"
+           "icon": "https://api.iconify.design/mdi/language-java.svg?color=%23808080"
         },
         {
             "name": "JavaScript",
-            "icon": "https://api.iconify.design/devicon/javascript.svg"
+            "icon": "https://api.iconify.design/simple-icons/javascript.svg?color=%23808080"
         },
         {
             "name": "TypeScript",
-            "icon": "https://api.iconify.design/devicon/typescript.svg"
+            "icon": "https://api.iconify.design/simple-icons/typescript.svg?color=%23808080"
         },
         {
             "name": "SQL",
-            "icon": "https://api.iconify.design/vscode-icons/file-type-plsql.svg"
+            "icon": "https://api.iconify.design/mdi/database-search-outline.svg?color=%23808080"
         }
     ],
     "backend": [
         {
             "name": "Spring Framework",
-            "icon": "https://api.iconify.design/devicon/spring.svg"
+            "icon": "https://api.iconify.design/simple-icons/spring.svg?color=%23808080"
         },
         {
             "name": "Spring Boot",
-            "icon": "https://api.iconify.design/simple-icons/springboot.svg?color=%236db33f"
+            "icon": "https://api.iconify.design/simple-icons/springboot.svg?color=%23808080"
         },
         {
             "name": "Spring MVC",
-            "icon": "https://api.iconify.design/thesvg/spring.svg?color=%231976D2"
+            "icon": "https://api.iconify.design/mdi/web.svg?color=%23808080"
         },
         {
             "name": "Spring Data JPA",
-            "icon": "https://api.iconify.design/thesvg/spring.svg?color=%23F57C00"
+            "icon": "https://api.iconify.design/mdi/database-cog.svg?color=%23808080"
         },
         {
             "name": "Hibernate",
-            "icon": "https://api.iconify.design/devicon/hibernate.svg"
+            "icon": "https://api.iconify.design/simple-icons/hibernate.svg?color=%23808080"
         },
         {
             "name": "REST APIs",
-            "icon": "https://api.iconify.design/logos/swagger.svg"
+            "icon": "https://api.iconify.design/simple-icons/swagger.svg?color=%23808080"
         },
         {
             "name": "Microservices",
-            "icon": "https://api.iconify.design/carbon/microservices-1.svg?color=%2300ACC1"
+            "icon": "https://api.iconify.design/mdi/lan-connect.svg?color=%23808080"
         }
     ],
     "frontendAndMobile": [
         {
             "name": "React",
-            "icon": "https://api.iconify.design/devicon/react.svg"
+            "icon": "https://api.iconify.design/simple-icons/react.svg?color=%23808080"
         },
         {
             "name": "Redux",
-            "icon": "https://api.iconify.design/devicon/redux.svg"
+            "icon": "https://api.iconify.design/simple-icons/redux.svg?color=%23808080"
         },
         {
             "name": "React Native",
-            "icon": "https://api.iconify.design/catppuccin/typescript-react.svg"
+            "icon": "https://api.iconify.design/simple-icons/react.svg?color=%23808080"
         },
         {
             "name": "HTML5",
-            "icon": "https://api.iconify.design/devicon/html5.svg"
+            "icon": "https://api.iconify.design/simple-icons/html5.svg?color=%23808080"
         },
         {
             "name": "CSS3",
-            "icon": "https://api.iconify.design/devicon/css3.svg"
+            "icon": "https://api.iconify.design/simple-icons/css3.svg?color=%23808080"
         }
     ],
     "databases": [
         {
             "name": "Oracle",
-            "icon": "https://api.iconify.design/simple-icons/oracle.svg?color=%23C74634"
+            "icon": "https://api.iconify.design/simple-icons/oracle.svg?color=%23808080"
         },
         {
             "name": "PostgreSQL",
-            "icon": "https://api.iconify.design/logos/postgresql.svg"
+            "icon": "https://api.iconify.design/simple-icons/postgresql.svg?color=%23808080"
         },
         {
             "name": "MySQL",
-            "icon": "https://api.iconify.design/logos/mysql.svg"
+            "icon": "https://api.iconify.design/simple-icons/mysql.svg?color=%23808080"
         },
         {
             "name": "PL/SQL",
-            "icon": "https://api.iconify.design/mdi/database-outline.svg?color=%23C74634"
+            "icon": "https://api.iconify.design/mdi/database-outline.svg?color=%23808080"
         }
     ],
     "toolsAndDevelopment": [
         {
             "name": "Git",
-            "icon": "https://api.iconify.design/devicon/git.svg"
+            "icon": "https://api.iconify.design/simple-icons/git.svg?color=%23808080"
         },
         {
             "name": "GitHub",
-            "icon": "https://api.iconify.design/simple-icons/github.svg?color=%23666666"
+            "icon": "https://api.iconify.design/simple-icons/github.svg?color=%23808080"
         },
         {
             "name": "Maven",
-            "icon": "https://api.iconify.design/devicon/maven.svg"
+            "icon": "https://api.iconify.design/simple-icons/apachemaven.svg?color=%23808080"
         },
         {
             "name": "Postman",
-            "icon": "https://api.iconify.design/devicon/postman.svg"
+            "icon": "https://api.iconify.design/simple-icons/postman.svg?color=%23808080"
         },
         {
             "name": "Thunder Client",
-            "icon": "https://api.iconify.design/bitcoin-icons/lightning-circle-outline.svg?color=%237E57C2"
+                "icon": "https://api.iconify.design/mdi/flash-outline.svg?color=%23808080"
+
         }
     ],
     "practices": [
         {
             "name": "Agile",
-            "icon": "https://api.iconify.design/mdi/sync.svg?color=%23009688"
-        },
-        {
-            "name": "Scrum",
-            "icon": "https://api.iconify.design/mdi/clipboard-check-outline.svg?color=%23E67E22"
+            "icon": "https://api.iconify.design/mdi/refresh-auto.svg?color=%23808080"
         },
         {
             "name": "SDLC",
-            "icon": "https://api.iconify.design/mdi/sync.svg?color=%237E57C2"
+            "icon": "https://api.iconify.design/mdi/timeline-text-outline.svg?color=%23808080"
+        },
+        {
+            "name": "Scrum",
+            "icon": "https://api.iconify.design/mdi/clipboard-check-outline.svg?color=%23808080"
         },
         {
             "name": "Code Review",
-            "icon": "https://api.iconify.design/mdi/code-tags-check.svg?color=%231976D2"
+            "icon": "https://api.iconify.design/mdi/code-tags-check.svg?color=%23808080"
         },
         {
             "name": "Debugging",
-            "icon": "https://api.iconify.design/mdi/bug-check-outline.svg?color=%23E53935"
+            "icon": "https://api.iconify.design/mdi/bug-check-outline.svg?color=%23808080"
         }
     ]
 }
