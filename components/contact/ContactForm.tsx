@@ -745,7 +745,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
                                                 aria-hidden="true"
                                             />
 
-                                            {isSubmitting ? "Sending..." : "Send"}
+                                            {isSubmitting ? "Wait" : "Send"}
                                         </motion.button>
                                     </div>
                                 </div>
