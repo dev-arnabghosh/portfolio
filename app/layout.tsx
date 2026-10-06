@@ -7,8 +7,11 @@ import Script from "next/script";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 import "./globals.css";
+
 import Chatbot from "@/components/chat/Chatbot";
+
 import Preloader from "@/components/preloader/Preloader";
+
 import CopyProtection from "@/components/security/CopyProtection";
 
 const geistSans = Geist({
@@ -21,8 +24,11 @@ const geistMono = Geist_Mono({
     subsets: ["latin"],
 });
 
+const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || "https://arnabghosh.dev";
+
 export const metadata: Metadata = {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
+    metadataBase: new URL(siteUrl),
 
     title: "Arnab Ghosh | Full Stack Developer",
 
@@ -45,23 +51,46 @@ export const metadata: Metadata = {
     creator: "Arnab Ghosh",
 
     alternates: {
-        canonical: "/",
+        canonical: siteUrl,
     },
 
     openGraph: {
         title: "Arnab Ghosh | Full Stack Developer",
+
         description:
             "Full Stack Developer with 3+ years of experience building web and mobile applications using Java, Spring Boot, React and React Native.",
+
+        url: siteUrl,
+
         type: "website",
+
         siteName: "Arnab Ghosh | Full Stack Developer",
+
         locale: "en_US",
+
+        images: [
+            {
+                url: "/images/og-image.png",
+                width: 1200,
+                height: 630,
+                alt: "Arnab Ghosh | Full Stack Developer",
+            },
+        ],
     },
 
     twitter: {
         card: "summary_large_image",
+
         title: "Arnab Ghosh | Full Stack Developer",
+
         description:
             "Full Stack Developer with 3+ years of experience building web and mobile applications using Java, Spring Boot, React and React Native.",
+
+        images: ["/images/og-image.png"],
+    },
+
+    other: {
+        "portfolio-url": siteUrl,
     },
 
     robots: {
@@ -77,14 +106,11 @@ export const viewport: Viewport = {
     userScalable: false,
 };
 
-
 export default function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
-
     const jsonLd = {
         "@context": "https://schema.org",
         "@type": "Person",
@@ -108,7 +134,9 @@ export default function RootLayout({
 
     return (
         <html lang="en">
-            <body className={`${geistSans.variable} ${geistMono.variable} min-h-full antialiased`}>
+            <body
+                className={`${geistSans.variable} ${geistMono.variable} min-h-full antialiased`}
+            >
                 <Script
                     id="person-schema"
                     type="application/ld+json"
